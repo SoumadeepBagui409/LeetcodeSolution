@@ -11,6 +11,7 @@ class Solution {
        vector<int> visit(V,0);
        vector<int> value;
        tvl.push(0);
+       visit[0] =  1;
        while(!tvl.empty()){
            int ans = tvl.front();
            tvl.pop();
