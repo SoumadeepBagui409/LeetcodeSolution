@@ -88,19 +88,7 @@ public:
                 }
             }
         }
-        // for(int i =0;i<heights.size();i++){
-        //     for(int j = 0;j<heights[i].size();j++){
-        //         cout<<atlantic[i][j]<<" ";
-        //     }
-        //     cout<<"\n";
-        // }
-        // cout<<"\n";
-        // for(int i =0;i<heights.size();i++){
-        //     for(int j = 0;j<heights[i].size();j++){
-        //         cout<<pacific[i][j]<<" ";
-        //     }
-        //     cout<<"\n";
-        // }
+
         
         vector<vector<int>> ans;
         for(int i = 0;i<heights.size();i++){
