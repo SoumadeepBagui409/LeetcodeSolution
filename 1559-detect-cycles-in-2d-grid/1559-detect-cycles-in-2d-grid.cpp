@@ -13,7 +13,7 @@ public:
         return true;
     }
     bool cycle(vector<vector<char>>&grid,int i,int j,int parentI,int parentJ,int change,char alpha){
-        //cout<<i<<" "<<j<<"\n";
+    
         grid[i][j] = alpha - change;
         bool ans = false;
         for(auto direct: direction){
@@ -24,7 +24,7 @@ public:
                 auto currPos = cycle(grid,x1,y1,i,j,change,alpha);
                 ans = ans | currPos;
             }else if(isInside(x1,y1,grid) and  isParent(parentI,parentJ,x1,y1)  and grid[x1][y1] == alpha - change){
-                //cout<<i<<" "<<j<<" "<<x1<<" "<<y1<<" "<<parentI<<" "<<parentJ<<"\n";
+               
                 return true;
             }
         }
@@ -46,13 +46,12 @@ public:
                 if(grid[i][j]>='a'){
                 bool check = cycle(grid,i,j,-1,-1,change,grid[i][j]);
                 ans = ans | check;
-                   //display(grid);
-                    //cout<<"\n";
+
                 }
-                //cout<<"\n";
+
             }
         }
-       // cout<<"\n";
+
         return ans;
     }
 };
