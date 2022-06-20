@@ -99,12 +99,13 @@ and a pointer to right child */
 
 //Function to check whether a binary tree is foldable or not.
 void dfs(Node* root, vector<Node*> &holder){
-     holder.push_back(root);
+      holder.push_back(root);
     if(root==NULL){
         return;
     }
     dfs(root->left,holder);
     dfs(root->right,holder);
+   
    
 }
 void dfs1(Node* root, vector<Node*> &holder){
@@ -114,6 +115,7 @@ void dfs1(Node* root, vector<Node*> &holder){
     }
     dfs(root->right,holder);
     dfs(root->left,holder);
+    
    
 }
 bool IsFoldable(Node* root)
