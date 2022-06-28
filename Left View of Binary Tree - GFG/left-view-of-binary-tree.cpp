@@ -130,34 +130,30 @@ struct Node
 vector<int> leftView(Node *root)
 {
     if(root==NULL){
-        vector<int> temp;
-        return temp;
+        vector<int> grb;
+        return grb;
     }
-   queue<Node*> que;
-   vector<int> val;
-   que.push(root);
-   int i = 1;
-   while(!que.empty()){
-       int temp = 0;
-       for(int j = 0; j<i;j++){
-           Node *curr = que.front();
-           que.pop();
-           if(j==0){
-               val.push_back(curr->data);
-           }
-           if(curr->left!=NULL){
-               que.push(curr->left);
-               temp++;
-           }
-           
-           if(curr->right!=NULL){
-                que.push(curr->right);
-                temp++;
-           }
-          
+   map<int,int> leftViewer;
+   queue<pair<Node*,int>> tvl;
+   tvl.push({root,0});
+   while(!tvl.empty()){
+       pair<Node*,int> ans = tvl.front();
+       tvl.pop();
+       Node* currNode = ans.first;
+       int level = ans.second;
+       if(leftViewer.find(level)==leftViewer.end()){
+           leftViewer[level] = currNode->data; 
        }
-       i = temp;
+       if(currNode->left!=NULL){
+           tvl.push({currNode->left,level+1});
+       }
+       if(currNode->right!=NULL){
+           tvl.push({currNode->right,level+1});
+       }
    }
-   return val;
-   
+   vector<int> value;
+   for(auto x:leftViewer){
+       value.push_back(x.second);
+   }
+   return value;
 }
