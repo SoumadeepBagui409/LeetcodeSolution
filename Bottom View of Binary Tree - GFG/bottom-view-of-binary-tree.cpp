@@ -95,30 +95,33 @@ Node* buildTree(string str)
 
 class Solution {
   public:
-
     vector <int> bottomView(Node *root) {
-        queue<pair<Node*,int>> que;
-        vector<int> ans;
-        map<int,int> coordinate;
-        que.push({root,0});
-        
-        while(!que.empty()){
-            auto curr = que.front();
-            que.pop();
-            coordinate[curr.second-1] = curr.first->data;
-            if(curr.first->left!=NULL){
-                que.push({curr.first->left,curr.second-1});
-            }
-            if(curr.first->right!=NULL){
-                que.push({curr.first->right,curr.second+1});
-            }
-        }
-        
-        for(auto x:coordinate)
-            ans.push_back(x.second);
-        
-        return ans;
-    
+        map<int,int> view;
+      queue<pair<Node*,int>> tvl;
+      tvl.push({root,0});
+      while(!tvl.empty()){
+          pair<Node*,int> curr = tvl.front();
+          tvl.pop();
+          
+          Node* currNode = curr.first;
+          int level = curr.second;
+          
+          
+              view[level] = currNode->data;
+          
+          
+          if(currNode->left!=NULL){
+              tvl.push({currNode->left,level-1});
+          }
+          if(currNode->right!=NULL){
+              tvl.push({currNode->right,level+1});
+          }
+      }
+      vector<int> ans;
+      for(auto x:view){
+          ans.push_back(x.second);
+      }
+      return ans;
     }
 };
 
