@@ -106,37 +106,32 @@ class Solution
     //from left to right in Binary Tree.
     vector<int> topView(Node *root)
     {
-        queue<pair<int,Node*>> que;
-        map<int,int> coordinate;
-        que.push({0,root});
-        vector<int> ans;
-        
-        while(!que.empty()){
-            
-            auto curr = que.front();
-            que.pop();
-            if(coordinate[curr.first]==0){
-                
-                coordinate[curr.first] = curr.second->data;
-                
-                
-                
-            }
-            
-                if(curr.second->left!=NULL){
-                    que.push({curr.first-1,curr.second->left});
-                }
-                
-                if(curr.second->right!=NULL){
-                    que.push({curr.first+1,curr.second->right});
-                }
-        }
-        
-        for(auto x:coordinate){
+      map<int,int> view;
+      queue<pair<Node*,int>> tvl;
+      tvl.push({root,0});
+      while(!tvl.empty()){
+          pair<Node*,int> curr = tvl.front();
+          tvl.pop();
           
-            ans.push_back(x.second);
-        }
-        return ans;
+          Node* currNode = curr.first;
+          int level = curr.second;
+          
+          if(view.find(level)==view.end()){
+              view[level] = currNode->data;
+          }
+          
+          if(currNode->left!=NULL){
+              tvl.push({currNode->left,level-1});
+          }
+          if(currNode->right!=NULL){
+              tvl.push({currNode->right,level+1});
+          }
+      }
+      vector<int> ans;
+      for(auto x:view){
+          ans.push_back(x.second);
+      }
+      return ans;
     }
 
 };
