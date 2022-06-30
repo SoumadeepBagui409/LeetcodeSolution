@@ -7,19 +7,27 @@ class Solution
 {
     public:
     //Function to count number of ways to reach the nth stair.
+    int optimalPath(int n,vector<int> &cache){
+        if(n==0){
+            return 1;
+        }
+        if(cache[n]!=-1){
+            return cache[n];
+        }
+        int op1 , op2;
+         op1 = op2 = 0;
+        if(n-1>=0){
+            op1 = optimalPath(n-1,cache);
+        }
+        if(n-2>=0){
+            op2 = optimalPath(n-2,cache);
+        }
+        return cache[n] = (op1 + op2)%1000000007 ;
+    }
     int countWays(int n)
     {
-        vector<int> cache(n+1,0);
-        cache[0] = 1;
-        cache[1] = 1;
-        
-        for(int i = 2; i<=n ; i++){
-            if(i-1>=0)cache[i]=(cache[i]+cache[i-1])%(1000000007);
-            if(i-2>=0){
-                cache[i]=(cache[i]+cache[i-2])%1000000007;
-            }
-        }        
-        return cache[n];
+        vector<int> cache(n+1,-1);
+        return optimalPath(n,cache);
     }
 };
 
