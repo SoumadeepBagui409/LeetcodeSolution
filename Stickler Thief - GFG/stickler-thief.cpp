@@ -8,27 +8,21 @@ class Solution
 {
     public:
     //Function to find the maximum money the thief can get.
-    int ans(int n,int *arr,vector<int> &cache,int idx){
-        if(idx>=n || n == 0){
-            return 0;
-        }
-        
-        if(cache[idx]!=-1){
-            return cache[idx];
-        }
-        
-        int op1,op2;
-        op1 = op2 = 0;
-        
-        op1 = arr[idx] + ans(n,arr,cache,idx+2);
-        op2 = ans(n,arr,cache,idx+1);
-        
-        return cache[idx] = max(op1,op2);
-    }
     int FindMaxSum(int arr[], int n)
     {
-        vector<int> cache(n+1,-1);
-        return ans(n,arr,cache,0);
+        if(n==1){
+            return arr[0];
+        }
+        vector<int> cache(n+1,0);
+        cache[0] = arr[0];
+        cache[1] = max(arr[0],arr[1]);
+        for(int i = 2; i < n;i++){
+            if(i-2>=0){
+                cache[i] = max(arr[i]+cache[i-2],cache[i-1]);
+            }
+        }
+    
+        return cache[n-1];   
     }
 };
 
